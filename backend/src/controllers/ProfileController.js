@@ -1,11 +1,10 @@
 const connection = require('../database/connection')
-const table = connection('incidents')
 
 module.exports = {
   async index(request, response) {
     const ong_id = request.headers.authorization;
 
-    const incidents = await table.where('ong_id', ong_id).select('*')
+    const incidents = await connection('incidents').where('ong_id', ong_id).select('*')
 
     return response.json(incidents)
   }
